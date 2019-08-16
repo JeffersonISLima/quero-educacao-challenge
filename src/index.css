@@ -1,15 +1,24 @@
+.border {
+  border: solid 2px red; /* BORRRRDERRRRRRR AUXXXXXXXXXXXXXXXXXX APAGAR AO FINAL */
+  margin-top: -2px;
+}
+
 * {
   margin: 0;
   padding: 0;
   outline: 0;
   font-size: 17px;
-  overflow: hidden;
   box-sizing: border-box;
-  Font: "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+body {
+  min-width: 340px;
+  min-height: 577;
 }
 
 a {
-  color: #00B7FF;
+  color: #00b7ff;
   text-decoration: none;
 }
 

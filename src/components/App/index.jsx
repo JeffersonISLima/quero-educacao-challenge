@@ -1,16 +1,23 @@
-import React from 'react';
+import React from "react";
+import Home from "../Home";
+import Navbar from "../Navbar";
+import Footer from "../Footer";
 
 function App() {
   return (
     <>
       <header className="App-header">
-        <h1>Navbar</h1>
+        <Navbar />
       </header>
-      <main>
-        <h1>Home</h1>
-      </main>
+
+      <section>
+        <Home />
+      </section>
+
       <footer>
-        <h2>Footer</h2>
+        <div>
+          <Footer />
+        </div>
       </footer>
     </>
   );
