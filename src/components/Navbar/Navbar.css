@@ -1,20 +1,20 @@
 .navbar-icon-circle {
   width: 40px;
-  height: 40px;
   padding-top: 3px;
   border-radius: 50%;
   text-align: center;
   margin-bottom: 7px;
-  border: 2px solid var(--second-blue);
+  border: 3.5px solid var(--second-blue);
 }
 
 .navbar-icon-circle i {
   height: 30px;
-  line-height: 30px;
+  line-height: 25px;
 }
 
-.first-column > h2 {
-  font-size: 1.3em;
+.nav-font-settings {
+  font-size: 1.5em;
+  color: var(--second-blue);
 }
 
 .container-first-part-nav-bar {
@@ -32,33 +32,77 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  justify-content: center;
   color: var(--second-blue);
 }
 
 .second-column {
   width: 50%;
   display: flex;
-  padding-left: 5%; /* DESKTOP */
-  align-items: center;
+  margin-top: 0;
+  justify-content: center;
 }
 
-.second-column > h2 {
+.second-column>div>h2 {
   font-size: 1.4em;
-  font-weight: bolder;
   color: var(--second-yellow);
 }
 
-.second-column > h2 > span {
+.second-column>div>h2>span {
   font-size: 1em;
-  font-weight: bolder;
   color: var(--second-blue);
+}
+
+.second-column__items {
+  width: 70px;
 }
 
 .third-column {
   width: 25%;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
+
+.third-column>h2 {
+  font-size: 1em;
+}
+
+.icon-user-account {
+  font-size: 40px;
+  margin-bottom: 7px;
+}
+
+.container-second-part-nav-bar {
+  height: 50px;  /* DESKTOP */
+  display: flex;
+  margin-top: 10px;
+  padding: 10px 10px;  /* DESKTOP */
+  color: var(--white);
+  justify-content: space-between;
+  background-color: var(--main-blue);
+}
+
+.container-second-part-nav-bar h2 {
+  font-size: 1.1em;
+}
+
+.menu {
+  width: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.container-third-part-nav-bar {
+  display: flex;
+  padding: 20px 10px;
+  color: var(--second-blue);
+}
+
+.container-third-part-nav-bar i {
+  padding-right: 10px
+}
+
+
+
+/* MEDIA QUERIE AQUI */

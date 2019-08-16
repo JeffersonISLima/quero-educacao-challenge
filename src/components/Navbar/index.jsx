@@ -13,35 +13,39 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="border">
+      <nav>
         <div className="container-first-part-nav-bar">
-          <div className="first-column border">
+          <div className="first-column">
             <div className="navbar-icon-circle">
               <i className="fas fa-info" />
             </div>
-            <h2>Ajuda</h2>
+            <h2 className='nav-font-settings'>Ajuda</h2>
           </div>
 
-          <div className="second-column border">
+          <div className="second-column">
             {image}
-            <h2>
-              QUERO <span>BOLSA</span>
-            </h2>
+            <div className="second-column__items">
+              <h2>
+                QUERO <span>BOLSA</span>
+              </h2>
+            </div>
           </div>
 
-          <div className="third-column border">
-            <i className="far fa-user-circle" />
-            <h2>Conta</h2>
+          <div className="third-column nav-font-settings">
+            <i className="far fa-user-circle icon-user-account" />
+            <h2 className='nav'>Conta</h2>
           </div>
         </div>
 
-        <div>
+        <div className="container-second-part-nav-bar">
           <h2>Minha conta</h2>
-          <h2>Menu </h2>
-          <i className="fas fa-chevron-down" />
+          <div className="menu">
+            <h2>Menu </h2>
+            <i className="fas fa-chevron-down" />
+          </div>
         </div>
 
-        <div>
+        <div className="container-third-part-nav-bar">
           <i className="fas fa-chevron-left" />
           <h2>Minha conta</h2>
         </div>
