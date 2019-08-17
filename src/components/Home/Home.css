@@ -1,0 +1,47 @@
+.title {
+  font-size: 2em;
+  padding: 0 10px 15px;
+}
+
+.article {
+  padding: 10px 15px 15px 10px;
+}
+
+.semester {
+  width: 80%;
+  margin: auto;
+  text-align: center;
+  border-radius: 5px;
+  border: 2px solid var(--second-blue);
+}
+
+.semester__border {
+  margin: -2px;
+  border-radius: 2px;
+  padding: 15px 0 15px;
+  color: var(--second-blue);
+  border: 2px solid var(--second-blue);
+}
+
+.semester__first__arrow {
+  color: var(--white);
+  background-color: var(--second-blue);
+}
+
+.add-scholarship {
+  width: 80%;
+  margin: auto;
+  display: flex;
+  margin-top: 30px;
+  line-height: 30px;
+  padding: 10px 30px;
+  text-align: center;
+  margin-bottom: 100px;
+  flex-direction: column;
+  box-shadow: 1px 1px 3px 1px var(--gray);
+}
+
+.button {
+  cursor: pointer;
+  color: var(--second-blue);
+}
