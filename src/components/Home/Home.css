@@ -1,9 +1,11 @@
 .title {
   font-size: 2em;
   padding: 0 10px 15px;
+  color: var(--black-texts);
 }
 
 .article {
+  color: var(--black-texts);
   padding: 10px 15px 15px 10px;
 }
 
@@ -41,7 +43,23 @@
   box-shadow: 1px 1px 3px 1px var(--gray);
 }
 
+.add-scholarship:active {
+  margin-top: 33px;
+  box-shadow: 0.5px 0.2px var(--gray);
+}
+
 .button {
   cursor: pointer;
-  color: var(--second-blue);
+  color: var(--black-texts);
+}
+
+.icon-plus-scholarship {
+  width: 50px;
+  margin: auto;
+  border-radius: 50%;
+  border: 5px solid var(--main-blue);
+}
+
+.icon-plus-scholarship i {
+  color: var(--main-blue);
 }

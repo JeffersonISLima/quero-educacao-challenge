@@ -1,5 +1,6 @@
-import React from "react";
 import Modal from "react-modal";
+import Checkbox from "../Checkbox";
+import React, { Component } from "react";
 
 /* const customStyles = {
   content: {
@@ -14,31 +15,26 @@ import Modal from "react-modal";
 
 /* Modal.setAppElement('./index.jsx') */
 
-class ModalC extends React.Component {
+class ModalScholarships extends Component {
   constructor(props) {
     super(props);
-    console.log("@@@@@@@@@@@@@@@@@@@@@@@@", this.props.click);
     this.state = {
       modalIsOpen: true,
-      favorites: []
+      hasScholarship: false,
+      favoritesScholarship: new Map()
     };
 
     this.openModal = this.openModal.bind(this);
-    this.afterOpenModal = this.afterOpenModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  openModal(click) {
-    console.log("CLIQUEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE", click);
-
+  /* Modal */
+  openModal() {
     this.setState({
       modalIsOpen: true
     });
-  }
-
-  afterOpenModal() {
-    // references are now sync'd and can be accessed.
-    this.subtitle.style.color = "#f00";
   }
 
   closeModal() {
@@ -46,42 +42,118 @@ class ModalC extends React.Component {
       modalIsOpen: false
     });
   }
+  /* -------- */
+
+  handleChange(event) {
+    const item = event.target.name;
+    const isChecked = event.target.checked;
+    this.setState(prevState => ({
+      favoritesScholarship: prevState.favoritesScholarship.set(item, isChecked)
+    }));
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    this.setState({
+      modalIsOpen: false,
+      hasScholarship: true
+    });
+  }
 
   componentWillReceiveProps() {
-    this.openModal(this.props.click);
+    this.openModal();
   }
 
   render() {
+    const { isChecked } = this.state;
+    const listOfAllScholarship = [...this.props.scholarships];
     return (
-      <div>
-        {/* <button onClick={this.openModal}>Open Modal</button>  */}
-
+      <>
         <Modal
+          ariaHideApp={false}
+          contentLabel="List Scholarship"
           isOpen={this.state.modalIsOpen}
-          onAfterOpen={this.afterOpenModal}
           onRequestClose={this.closeModal}
+          onAfterOpen={this.afterOpenModal}
           /* style={customStyles} */
-          contentLabel="Example Modal"
         >
-          <h2 ref={subtitle => (this.subtitle = subtitle)}>Lista</h2>
           <button onClick={this.closeModal}>close</button>
-          <div>I am a modal</div>
-          {this.props.teste.map((e, idx) => {
-            console.log("%%%%%%%%%%%", e.campus.name);
+          <h2 >Adicionar bolsa</h2>
+          <h2>Filtre e adicione as bolsas de seu interesse.</h2>
+          
+          <div>
+            <h2>SELECIONE SUA CIDADE</h2>
+            <select name="" id="">
+              <option value="teste">teste</option>
+            </select>
 
-            return (
-              <div key={idx}>
-                <input type="checkbox" />
-                <p>{e.campus.name}</p>
-              </div>
-            );
-          })}
+            <h2>SELECIONE O CURSO DE SUA PREFERÊNCIA</h2>
+            <select name="" id="">
+              <option value="">teste</option>
+            </select>
+          </div>
+
+          <h2>COMO VOCÊ QUER ESTUDAR?</h2>
+          <div>
+            <label htmlFor="">
+              <input type="checkbox" name="Presencial" value="Presencial" id=""/>
+              Presencial
+            </label>
+
+            <label htmlFor="">
+              <input type="checkbox" name="Presencial" value="Presencial" id=""/>
+              A distância
+            </label>
+          </div>
+
+          <h2>ATÉ QUANTO PODE PAGAR?</h2>
+          <h3>R$10.000</h3>
+          <div>
+            <input type="range" name="" id=""/>
+          </div>
+
+          <div>
+            <h2>Resultado: </h2>
+            <h2>Ordenar por </h2>
+          </div>
+
+          <div>
+            <h2>Nome da faculdade </h2>
+          </div>
+
+          <form onSubmit={this.handleSubmit}>
+            {
+              listOfAllScholarship.map((element, idx) => (
+                <div key={idx}>
+                  <label>
+                    {element.campus.name}
+                    <Checkbox
+                      type="checkbox"
+                      checked={isChecked}
+                      name={element.campus.name}
+                      value={element.campus.name}
+                      onChange={e => this.handleChange(e, idx)}
+                    />
+                  </label>
+                  <br />
+                </div>
+              ))
+            }
+            <div>
+              <input type="button" value="Cancelar"/>
+              <input type="submit" value="Adicionar Bolsa" />
+            </div>
+          </form>
         </Modal>
 
-        <h1>Aqui lista</h1>
-      </div>
+        {
+          this.state.hasScholarship
+           ? this.state.favoritesScholarship
+           : null
+        }
+      </>
     );
   }
 }
 
-export default ModalC;
+export default ModalScholarships;

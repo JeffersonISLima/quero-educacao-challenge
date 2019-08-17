@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { Component } from "react";
-import ModalC from "../Modal";
+import ModalScholarships from "../Modal";
 
 class Scholarship extends Component {
   constructor(props) {
@@ -29,16 +29,10 @@ class Scholarship extends Component {
   }
 
   render() {
-    /*  const list = this.state.allScholarships.map((e, idx) => {
-      return <h2 key={idx}> {e.campus.name}</h2>;
-    }); */
-
-    console.log("!@!@!@@", this.props.click);
     return (
       <>
-        <ModalC
-         teste={this.state.allScholarships}
-         click={this.props.click}
+        <ModalScholarships
+          scholarships={this.state.allScholarships}
         />
       </>
     );

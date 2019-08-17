@@ -47,7 +47,9 @@ class Home extends Component {
           <section>
             <div className="add-scholarship">
               <div className="button" onClick={e => this.modalScholarship(e)}>
-                <i className="fas fa-plus" />
+                <div className="icon-plus-scholarship">
+                  <i className="fas fa-plus" />
+                </div>
                 <h2>Adicionar bolsa</h2>
                 <p>Clique para adicionar bolsas de cursos do seu interesse</p>
               </div>
@@ -56,8 +58,8 @@ class Home extends Component {
             <div>
               {
                 this.state.toggleView
-                ? <Scholarship click={true} />
-                : "Sua lista de favoritos aparecerá aqui"
+                ? <Scholarship />
+                : <h2>Sua lista de favoritos está vazia</h2>
               }
             </div>
           </section>
