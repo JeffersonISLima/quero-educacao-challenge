@@ -9,10 +9,14 @@
   outline: 0;
   font-size: 17px;
   box-sizing: border-box;
-  font: "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 body {
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   min-width: 340px;
   min-height: 577;
 }

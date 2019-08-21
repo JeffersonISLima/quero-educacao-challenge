@@ -40,6 +40,8 @@
   display: flex;
   margin-top: 0;
   justify-content: center;
+  border-left: 2px solid var(--gray-line-cards);
+  border-right: 2px solid var(--gray-line-cards);
 }
 
 .second-column>div>h2 {

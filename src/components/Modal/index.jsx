@@ -1,3 +1,4 @@
+import "./Modal.css";
 import Modal from "react-modal";
 import Checkbox from "../Checkbox";
 import React, { Component } from "react";
@@ -11,19 +12,25 @@ import React, { Component } from "react";
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
   }
-}; */
+};  */
 
-/* Modal.setAppElement('./index.jsx') */
+const customStyles = {
+  overlay: {
+    opacity: "0.88",
+    backgroundColor: "#1F2D30"
+  }
+};
 
 class ModalScholarships extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      filtered: {},
       modalIsOpen: true,
       hasScholarship: false,
-      favoritesScholarship: new Map()
+      favoritesScholarship: [],
+      buttonAddScholarship: false
     };
-
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -45,11 +52,20 @@ class ModalScholarships extends Component {
   /* -------- */
 
   handleChange(event) {
-    const item = event.target.name;
-    const isChecked = event.target.checked;
-    this.setState(prevState => ({
-      favoritesScholarship: prevState.favoritesScholarship.set(item, isChecked)
-    }));
+    const {
+      target: { name, isChecked, value }
+    } = event;
+
+    const scholarshipsFavorite = this.props.scholarships.filter(
+      (element, idx) => {
+        return element.full_price.toString().includes(name);
+      }
+    );
+    this.setState({
+      filtered: scholarshipsFavorite,
+      buttonAddScholarship: true,
+      favoritesScholarship: this.state.favoritesScholarship + name + ","
+    });
   }
 
   handleSubmit(event) {
@@ -67,6 +83,27 @@ class ModalScholarships extends Component {
   render() {
     const { isChecked } = this.state;
     const listOfAllScholarship = [...this.props.scholarships];
+
+    const lista = [...listOfAllScholarship]
+
+
+    const images = ['foo', 'bar', 'foo', 'bar', 'bach', 'bach', 'cafe'];
+    
+    const filteredImages = images.filter((exam, idx) => images.indexOf(exam) === idx);     
+
+    console.log('retornado', filteredImages); 
+
+    console.log("JA TEMMMMMMMMMMMM", lista);
+    
+
+    let campu = lista.filter((e, idx) => console.log(
+
+      lista.indexOf(e.campus.city) === idx) 
+      )
+
+    console.log('campusCityFiltereds', campu);
+    
+
     return (
       <>
         <Modal
@@ -75,82 +112,158 @@ class ModalScholarships extends Component {
           isOpen={this.state.modalIsOpen}
           onRequestClose={this.closeModal}
           onAfterOpen={this.afterOpenModal}
-          /* style={customStyles} */
+          style={customStyles}
         >
-          <button onClick={this.closeModal}>close</button>
-          <h2 >Adicionar bolsa</h2>
-          <h2>Filtre e adicione as bolsas de seu interesse.</h2>
-          
-          <div>
-            <h2>SELECIONE SUA CIDADE</h2>
-            <select name="" id="">
-              <option value="teste">teste</option>
-            </select>
-
-            <h2>SELECIONE O CURSO DE SUA PREFERÊNCIA</h2>
-            <select name="" id="">
-              <option value="">teste</option>
-            </select>
+          <div className="close-modal-btn">
+            <h1>
+              <span onClick={this.closeModal}>X</span>
+            </h1>
           </div>
 
-          <h2>COMO VOCÊ QUER ESTUDAR?</h2>
-          <div>
-            <label htmlFor="">
-              <input type="checkbox" name="Presencial" value="Presencial" id=""/>
-              Presencial
-            </label>
+          <div className="section-options margin-bottom-10px">
+            <h2 className="title-add-scholarship">Adicionar bolsa</h2>
+            <h2 className="subtitle-add-scholarship">
+              Filtre e adicione as bolsas de seu interesse.
+            </h2>
 
-            <label htmlFor="">
-              <input type="checkbox" name="Presencial" value="Presencial" id=""/>
-              A distância
-            </label>
+            <div>
+              <h2 className="select-texts">SELECIONE SUA CIDADE</h2>
+              <select className="margin-top-10px " name="">
+                
+                 <option value={filteredImages}>{filteredImages}</option>
+              </select>
+
+              <h2 className="select-texts">
+                SELECIONE O CURSO DE SUA PREFERÊNCIA
+              </h2>
+              <select className="margin-top-10px margin-bottom-10px" name="" >
+                {
+                  listOfAllScholarship.map(((e, idx) => {
+                  return <option key={idx} value={e.course.name}>{e.course.name}</option> 
+                  }))
+                }
+              </select>
+            </div>
+
+            <h2 className="margin-top-10px">COMO VOCÊ QUER ESTUDAR?</h2>
+            <div className="margin-top-10px">
+              <label id="teste" htmlFor="">
+                <input
+                  type="checkbox"
+                  name="Presencial"
+                  value="Presencial"
+                  id=""
+                />
+                <span className="location-of-study">Presencial</span>
+              </label>
+
+              <label htmlFor="">
+                <input
+                  type="checkbox"
+                  name="Presencial"
+                  value="Presencial"
+                  id=""
+                />
+                <span className="location-of-study">A distância</span>
+              </label>
+            </div>
+
+            <h2 className="margin-top-10px margin-bottom-10px">
+              ATÉ QUANTO PODE PAGAR?
+            </h2>
+            <h3>R$10.000</h3>
+            <div className="margin-top-10px">
+              <input
+                type="range"
+                min="1"
+                max="100"
+                value="50"
+                className="slider"
+                id="myRange"
+                onChange={this.handleChange}
+              />
+            </div>
           </div>
 
-          <h2>ATÉ QUANTO PODE PAGAR?</h2>
-          <h3>R$10.000</h3>
-          <div>
-            <input type="range" name="" id=""/>
-          </div>
-
-          <div>
+          <div className="result-of-the-search margin-bottom-10px">
             <h2>Resultado: </h2>
             <h2>Ordenar por </h2>
           </div>
 
-          <div>
-            <h2>Nome da faculdade </h2>
+          <div className="college-name margin-bottom-10px">
+            <h2>
+              Nome da faculdade <i className="fas fa-chevron-down" />{" "}
+            </h2>
           </div>
 
           <form onSubmit={this.handleSubmit}>
-            {
-              listOfAllScholarship.map((element, idx) => (
-                <div key={idx}>
-                  <label>
-                    {element.campus.name}
+            {listOfAllScholarship.map((element, idx) => (
+              <div key={idx}>
+                <label className="cards-row">
+                  <div className="column-checkbox">
                     <Checkbox
                       type="checkbox"
                       checked={isChecked}
-                      name={element.campus.name}
-                      value={element.campus.name}
-                      onChange={e => this.handleChange(e, idx)}
+                      name={element.full_price}
+                      onChange={e => this.handleChange(e)}
                     />
-                  </label>
-                  <br />
-                </div>
-              ))
-            }
-            <div>
-              <input type="button" value="Cancelar"/>
-              <input type="submit" value="Adicionar Bolsa" />
+                  </div>
+
+                  <div className="column-image">
+                    <img src={element.university.logo_url} alt="" />
+                  </div>
+
+                  <div className="column-scholarship-value">
+                    <h2 className="course-name">
+                      <span>{element.course.name}</span>
+                    </h2>
+                    <h2 className="course-level">{element.course.level}</h2>
+                    <div>
+                      <h2 className="course-percentage-value">
+                        <span>
+                          Bolsa de{" "}
+                          <span>
+                            {element.discount_percentage}% R${" "}
+                            {element.price_with_discount}/mês
+                          </span>
+                        </span>
+                      </h2>
+                    </div>
+                  </div>
+                </label>
+                <br />
+              </div>
+            ))}
+            <div className="container-bnt">
+              <input
+                className="btn-cancel"
+                type="button"
+                value="Cancelar"
+                onClick={this.closeModal}
+              />
+              {this.state.buttonAddScholarship ? (
+                <input
+                  className="bnt-submit"
+                  type="submit"
+                  value="Adicionar bolsa&#40;s&#41;"
+                />
+              ) : (
+                <input
+                  className="bnt-submit-disabled"
+                  type="submit"
+                  value="Adicionar bolsa&#40;s&#41;"
+                  disabled
+                />
+              )}
             </div>
           </form>
         </Modal>
 
-        {
-          this.state.hasScholarship
-           ? this.state.favoritesScholarship
-           : null
-        }
+        {this.state.hasScholarship
+          ? this.state.filtered.map(e => {
+              return e.campus.name + e.full_price;
+            })
+          : null}
       </>
     );
   }
