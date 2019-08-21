@@ -38,7 +38,7 @@
   line-height: 30px;
   padding: 10px 30px;
   text-align: center;
-  margin-bottom: 100px;
+  margin-bottom: 30px;
   flex-direction: column;
   box-shadow: 1px 1px 3px 1px var(--gray);
 }

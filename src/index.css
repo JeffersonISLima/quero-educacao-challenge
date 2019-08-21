@@ -1,5 +1,6 @@
 .border {
-  border: solid 2px red; /* BORRRRDERRRRRRR AUXXXXXXXXXXXXXXXXXX APAGAR AO FINAL */
+  border: solid 2px red;
+  /* BORRRRDERRRRRRR AUXXXXXXXXXXXXXXXXXX APAGAR AO FINAL */
   margin-top: -2px;
 }
 
@@ -12,13 +13,13 @@
 }
 
 body {
-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   min-width: 340px;
-  min-height: 577;
+  min-height: 537px;
 }
 
 a {

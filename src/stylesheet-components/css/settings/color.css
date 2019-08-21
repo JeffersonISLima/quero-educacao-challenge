@@ -1,14 +1,14 @@
 :root {
-  --main-blue: #18acc4;
-  --second-blue: #007a8d;
-  --main-yellow: #fdcb13;
-  --second-yellow: #de9e1f;
-  --green: #0fa866;
-  --black-texts: #1f2d30;
-  --gray-background: #fbfbfb;
-  --modal-overlay-black: #1f2d30;
+  --gray: gray;
   --opacity: 88%;
   --white: #fff;
-  --gray: gray;
+  --green: #0fa866;
+  --main-blue: #18acc4;
+  --black-texts: #1f2d30;
+  --main-yellow: #fdcb13;
+  --second-blue: #007a8d;
+  --second-yellow: #de9e1f;
+  --gray-background: #fbfbfb;
   --gray-line-cards: #d3d3d3;
+  --modal-overlay-black: #1f2d30;
 }

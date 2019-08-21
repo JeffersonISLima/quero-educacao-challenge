@@ -12,8 +12,7 @@ class Scholarship extends Component {
   }
 
   callApi() {
-    axios
-      .get("https://testapi.io/api/redealumni/scholarships")
+    axios.get("https://testapi.io/api/redealumni/scholarships")
       .then(response => {
         this.setState({
           allScholarships: response.data

@@ -59,7 +59,7 @@ class Home extends Component {
               {
                 this.state.toggleView
                 ? <Scholarship />
-                : <h2>Sua lista de favoritos está vazia</h2>
+                : null
               }
             </div>
           </section>

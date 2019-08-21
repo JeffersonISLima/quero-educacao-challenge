@@ -6,8 +6,8 @@ const Navbar = () => {
   const image = (
     <img
       className="img"
-      src="../images/icon-education.png"
       alt="Education icon color yellow"
+      src="../images/icon-education.png"
     />
   );
 
