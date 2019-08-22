@@ -14,11 +14,12 @@ class ModalScholarships extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      filtered: [],
       modalIsOpen: true,
       hasScholarship: false,
+      scholarshipsSelected: [],
       favoritesScholarship: [],
-      buttonAddScholarship: false
+      scholarshipIsEnabled: null,
+      buttonAddScholarship: false,
     };
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
@@ -43,17 +44,19 @@ class ModalScholarships extends Component {
 
   handleChange(event) {
     const {
-      target: { name, isChecked, value }
+      target: { name }
     } = event;
 
-    const scholarshipsFavorite = this.props.scholarships.filter(
-      (element, idx) => {
+    const scholarshipsSelected = this.props.scholarships.filter(
+      (element) => {
         return element.full_price.toString().includes(name);
       }
     );
+
     this.setState({
       buttonAddScholarship: true,
-      filtered: scholarshipsFavorite,
+      scholarshipsSelected: scholarshipsSelected,
+      scholarshipIsEnabled: scholarshipsSelected[0].enabled,
       favoritesScholarship: this.state.favoritesScholarship + name + ","
     });
   }
@@ -73,23 +76,24 @@ class ModalScholarships extends Component {
   }
 
 
-  componentWillReceiveProps() {
+  UNSAFE_componentWillReceiveProps() {
     this.openModal();
   }
 
   render() {
     const { isChecked } = this.state;
+    const { scholarshipIsEnabled } = this.state;
     const listOfAllScholarship = [...this.props.scholarships];
 
     return (
       <>
         <Modal
           ariaHideApp={false}
+          style={customStyles}
           contentLabel="List Scholarship"
           isOpen={this.state.modalIsOpen}
           onRequestClose={this.closeModal}
           onAfterOpen={this.afterOpenModal}
-          style={customStyles}
         >
           <div className="close-modal-btn">
             <h1>
@@ -188,7 +192,7 @@ class ModalScholarships extends Component {
                   </div>
 
                   <div className="column-image">
-                    <img src={element.university.logo_url} alt="" />
+                    <img src={element.university.logo_url} alt={element.university.logo_url} />
                   </div>
 
                   <div className="column-scholarship-value">
@@ -242,12 +246,10 @@ class ModalScholarships extends Component {
 
         {
           this.state.hasScholarship
-            ? this.state.filtered.map((e, idx) => {
-              console.log(e);
-
+            ? this.state.scholarshipsSelected.map((e, idx) => {
               return (
                 <div key={idx} className="container-favorites-scholarships">
-                  <img src={e.university.logo_url} alt="" />
+                  <img src={e.university.logo_url} alt={e.university.logo_url} />
                   <h4 className="university-name">{e.university.name}</h4>
                   <h4 className="course-name">{e.course.name}</h4>
                   <div className="university-score">
@@ -283,38 +285,68 @@ class ModalScholarships extends Component {
                     <h4>Início das aulas em: {e.start_date}</h4>
                   </div>
 
-                  <h4 className="course-price-title">Mensalidade com o Quero Bolsa:</h4>
-                  <h4 className="course-price-full-price">R$ {e.full_price.toString().replace(/['.']/g, ',')}</h4>
+                  {
+                    scholarshipIsEnabled
+                      ? 
+                        <>
+                          <h4 className="course-price-title">Mensalidade com o Quero Bolsa:</h4>
+                          <h4 className="course-price-full-price">R$ {e.full_price.toString().replace(/['.']/g, ',')}</h4>
+                          
+                          <div className="container-prices">
+                          <h4 className="price_with_discount">R$ {e.price_with_discount.toString().replace(/['.']/g, ',')}</h4>
+                          <h4> /mês</h4>
+                          </div>
 
-                  <div className="container-prices">
-                    <h4 className="price_with_discount">R$ {e.price_with_discount.toString().replace(/['.']/g, ',')} </h4>
-                    <h4> /mês</h4>
-                  </div>
+                          <div className="container-bnt">
+                          <input
+                            type="button"
+                            value="Excluir"
+                            className="btn-cancel"
+                            onClick={this.handleFavoritesScholarship}
+                            />
+                          {
+                            this.state.buttonAddScholarship
+                              ? 
+                                (<input
+                                  type="submit"
+                                  className="bnt-submit"
+                                  value="Ver oferta"
+                                  />
+                                  )
+                              : 
+                                (<input
+                                  type="submit"
+                                  className="bnt-submit-disabled"
+                                  value="Indisponível"
+                                  disabled
+                                  />
+                                  )
+                          }
+                          </div>
+                        </>
+                      : 
+                        <>
+                          <h4 style={{fontSize: '1em'}} className="course-price-title">Bolsa indisponível</h4>
+                          <p>
+                            Entre em contato com nosso atendimento para saber mais.
+                          </p>
+                          <div style={{marginTop: '30px'}} className="container-bnt">
+                            <input
+                              type="button"
+                              value="Excluir"
+                              className="btn-cancel"
+                              onClick={this.handleFavoritesScholarship}
+                              />
 
-                  <div className="container-bnt">
-                    <input
-                      type="button"
-                      value="Excluir"
-                      className="btn-cancel"
-                      onClick={this.handleFavoritesScholarship}
-                    />
-                    {
-                      this.state.buttonAddScholarship
-                        ? (<input
-                          type="submit"
-                          className="bnt-submit"
-                          value="Ver oferta"
-                        />
-                        )
-                        : (<input
-                          type="submit"
-                          className="bnt-submit-disabled"
-                          value="Indisponível"
-                          disabled
-                        />
-                        )
-                    }
-                  </div>
+                            <input
+                              type="submit"
+                              value="Indisponível"
+                              className="bnt-submit-disabled"
+                              disabled
+                            />
+                          </div>
+                        </>
+                  }
                 </div>
               )
             })

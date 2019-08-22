@@ -23,7 +23,7 @@ const Navbar = () => {
           </div>
 
           <div className="second-column">
-            {image}
+            <figure>{image}</figure>
             <div className="second-column__items">
               <h2>
                 QUERO <span>BOLSA</span>

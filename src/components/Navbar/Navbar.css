@@ -75,10 +75,10 @@
 }
 
 .container-second-part-nav-bar {
-  height: 50px;  /* DESKTOP */
+  height: 50px;  
   display: flex;
   margin-top: 10px;
-  padding: 10px 10px;  /* DESKTOP */
+  padding: 10px 10px; 
   color: var(--white);
   align-items: center;
   justify-content: space-between;
@@ -105,7 +105,3 @@
 .container-third-part-nav-bar i {
   padding-right: 10px
 }
-
-
-
-/* MEDIA QUERIE AQUI */

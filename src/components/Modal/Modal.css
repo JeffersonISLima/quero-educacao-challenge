@@ -65,7 +65,7 @@ input[type="checkbox"] {
   cursor: pointer;
   appearance: none;
   border-radius: 50%;
-  background: white;
+  background: var(--white);
   -webkit-appearance: none;
   border: 2px solid var(--main-blue);
 }
@@ -184,8 +184,8 @@ input[type="checkbox"] {
   padding: 10px;
   font-size: 0.7em;
   border-radius: 5px;
-  background-color: #fff;
   color: var(--second-blue);
+  background-color: var(--white);
   border: 2px solid var(--second-blue);
 }
 
@@ -208,8 +208,8 @@ input[type="checkbox"] {
 }
 
 .course-name {
-  color: var(--main-blue);
   padding-bottom: 10px;
+  color: var(--main-blue);
 }
 
 .university-score {
@@ -253,7 +253,7 @@ input[type="checkbox"] {
 .container-course-kind__ball {
   height: 0.3em;
   border-radius: 50%;
-  border: 2px solid black;
+  border: 2px solid var(--black-texts);
 }
 
 .course-price-title {
@@ -280,7 +280,9 @@ input[type="checkbox"] {
 
 /* Desktop layout */
 @media (min-width: 960px) {
-  .container-prices {
-    background-color: blue;
+  .university-score,
+  .container-course-kind>div
+    {
+    width: 30%;
   }
 }
