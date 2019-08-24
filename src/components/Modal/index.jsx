@@ -1,7 +1,8 @@
-import "./Modal.css";
-import Modal from "react-modal";
-import Checkbox from "../Checkbox";
-import React, { Component } from "react";
+import './Modal.css';
+import _ from 'lodash';
+import Modal from 'react-modal';
+import Checkbox from '../Checkbox';
+import React, { Component } from 'react';
 
 const customStyles = {
   overlay: {
@@ -25,6 +26,7 @@ class ModalScholarships extends Component {
     this.closeModal = this.closeModal.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.renderCityName = this.renderCityName.bind(this);
     this.handleFavoritesScholarship = this.handleFavoritesScholarship.bind(this);
   }
 
@@ -75,6 +77,20 @@ class ModalScholarships extends Component {
     })
   }
 
+  renderCityName(listOfAllScholarship) {
+    const uniq = _.uniqBy(listOfAllScholarship, (cityNameUniq) => {
+      return cityNameUniq.campus.city;
+    });
+    return (
+      uniq.map(e => {
+        return (
+          <option>
+            {e.campus.city}
+          </option>
+        )
+      })
+    );
+  }
 
   UNSAFE_componentWillReceiveProps() {
     this.openModal();
@@ -110,11 +126,7 @@ class ModalScholarships extends Component {
             <div>
               <h2 className="select-texts">SELECIONE SUA CIDADE</h2>
               <select className="margin-top-10px " name="">
-                {
-                  listOfAllScholarship.map((cityName, idx) => {
-                    return <option key={idx} value={cityName.campus.city}>{cityName.campus.city}</option>
-                  })
-                }
+                {this.renderCityName(listOfAllScholarship)}
               </select>
 
               <h2 className="select-texts">
@@ -239,7 +251,6 @@ class ModalScholarships extends Component {
                   />
                   )
               }
-
             </div>
           </form>
         </Modal>
@@ -287,65 +298,65 @@ class ModalScholarships extends Component {
 
                   {
                     scholarshipIsEnabled
-                      ? 
-                        <>
-                          <h4 className="course-price-title">Mensalidade com o Quero Bolsa:</h4>
-                          <h4 className="course-price-full-price">R$ {e.full_price.toString().replace(/['.']/g, ',')}</h4>
-                          
-                          <div className="container-prices">
+                      ?
+                      <>
+                        <h4 className="course-price-title">Mensalidade com o Quero Bolsa:</h4>
+                        <h4 className="course-price-full-price">R$ {e.full_price.toString().replace(/['.']/g, ',')}</h4>
+
+                        <div className="container-prices">
                           <h4 className="price_with_discount">R$ {e.price_with_discount.toString().replace(/['.']/g, ',')}</h4>
                           <h4> /mês</h4>
-                          </div>
+                        </div>
 
-                          <div className="container-bnt">
+                        <div className="container-bnt">
                           <input
                             type="button"
                             value="Excluir"
                             className="btn-cancel"
                             onClick={this.handleFavoritesScholarship}
-                            />
+                          />
                           {
                             this.state.buttonAddScholarship
-                              ? 
-                                (<input
-                                  type="submit"
-                                  className="bnt-submit"
-                                  value="Ver oferta"
-                                  />
-                                  )
-                              : 
-                                (<input
-                                  type="submit"
-                                  className="bnt-submit-disabled"
-                                  value="Indisponível"
-                                  disabled
-                                  />
-                                  )
-                          }
-                          </div>
-                        </>
-                      : 
-                        <>
-                          <h4 style={{fontSize: '1em'}} className="course-price-title">Bolsa indisponível</h4>
-                          <p>
-                            Entre em contato com nosso atendimento para saber mais.
-                          </p>
-                          <div style={{marginTop: '30px'}} className="container-bnt">
-                            <input
-                              type="button"
-                              value="Excluir"
-                              className="btn-cancel"
-                              onClick={this.handleFavoritesScholarship}
+                              ?
+                              (<input
+                                type="submit"
+                                className="bnt-submit"
+                                value="Ver oferta"
                               />
+                              )
+                              :
+                              (<input
+                                type="submit"
+                                className="bnt-submit-disabled"
+                                value="Indisponível"
+                                disabled
+                              />
+                              )
+                          }
+                        </div>
+                      </>
+                      :
+                      <>
+                        <h4 style={{ fontSize: '1em' }} className="course-price-title">Bolsa indisponível</h4>
+                        <p>
+                          Entre em contato com nosso atendimento para saber mais.
+                          </p>
+                        <div style={{ marginTop: '30px' }} className="container-bnt">
+                          <input
+                            type="button"
+                            value="Excluir"
+                            className="btn-cancel"
+                            onClick={this.handleFavoritesScholarship}
+                          />
 
-                            <input
-                              type="submit"
-                              value="Indisponível"
-                              className="bnt-submit-disabled"
-                              disabled
-                            />
-                          </div>
-                        </>
+                          <input
+                            type="submit"
+                            value="Indisponível"
+                            className="bnt-submit-disabled"
+                            disabled
+                          />
+                        </div>
+                      </>
                   }
                 </div>
               )
