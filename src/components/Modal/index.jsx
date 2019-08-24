@@ -82,9 +82,9 @@ class ModalScholarships extends Component {
       return cityNameUniq.campus.city;
     });
     return (
-      uniq.map(e => {
+      uniq.map((e, idx) => {
         return (
-          <option>
+          <option key={idx}>
             {e.campus.city}
           </option>
         )
